@@ -42,6 +42,10 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: String,
       default: ''
+    },
+    avatar: {
+      type: String,
+      default: ''
     }
   },
   {

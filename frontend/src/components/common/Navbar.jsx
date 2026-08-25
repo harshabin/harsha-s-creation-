@@ -177,8 +177,12 @@ const Navbar = () => {
                       onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                       className="flex items-center gap-1.5 py-1.5 px-3 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold tracking-wide transition-colors"
                     >
-                      <span className="w-6 h-6 rounded-full bg-stone-950 text-white flex items-center justify-center text-xs uppercase">
-                        {user.name.charAt(0)}
+                      <span className="w-6 h-6 rounded-full overflow-hidden bg-stone-950 text-white flex items-center justify-center text-xs uppercase flex-shrink-0">
+                        {user.avatar ? (
+                          <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+                        ) : (
+                          user.name.charAt(0)
+                        )}
                       </span>
                       <span className="hidden md:inline max-w-[90px] truncate">{user.name.split(' ')[0]}</span>
                       <ChevronDown className="w-3.5 h-3.5 text-stone-500" />

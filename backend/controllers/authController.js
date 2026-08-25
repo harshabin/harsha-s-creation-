@@ -75,6 +75,7 @@ const loginUser = async (req, res, next) => {
           email: user.email,
           role: user.role,
           phone: user.phone,
+          avatar: user.avatar || '',
           addresses: user.addresses,
           token: generateToken(user._id, user.role)
         }
@@ -106,6 +107,7 @@ const getUserProfile = async (req, res, next) => {
           email: user.email,
           role: user.role,
           phone: user.phone,
+          avatar: user.avatar || '',
           addresses: user.addresses
         }
       });
@@ -127,6 +129,9 @@ const updateUserProfile = async (req, res, next) => {
     if (user) {
       user.name = req.body.name || user.name;
       user.phone = req.body.phone !== undefined ? req.body.phone : user.phone;
+      if (req.body.avatar !== undefined) {
+        user.avatar = req.body.avatar;
+      }
 
       if (req.body.email && req.body.email !== user.email) {
         const emailExists = await User.findOne({ email: req.body.email.toLowerCase() });
@@ -154,6 +159,7 @@ const updateUserProfile = async (req, res, next) => {
           email: updatedUser.email,
           role: updatedUser.role,
           phone: updatedUser.phone,
+          avatar: updatedUser.avatar,
           addresses: updatedUser.addresses,
           token: generateToken(updatedUser._id, updatedUser.role)
         }
