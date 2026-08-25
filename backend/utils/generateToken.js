@@ -1,9 +1,14 @@
 const jwt = require('jsonwebtoken');
 
 const generateToken = (id, role) => {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('JWT_SECRET environment variable is missing.');
+  }
+
   return jwt.sign(
     { id, role },
-    process.env.JWT_SECRET || 'own_brand_super_secret_jwt_key_2026_atelier',
+    secret,
     {
       expiresIn: process.env.JWT_EXPIRE || '7d'
     }

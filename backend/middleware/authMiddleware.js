@@ -11,10 +11,12 @@ const protect = async (req, res, next) => {
   ) {
     try {
       token = req.headers.authorization.split(' ')[1];
-      const decoded = jwt.verify(
-        token,
-        process.env.JWT_SECRET || 'own_brand_super_secret_jwt_key_2026_atelier'
-      );
+      const secret = process.env.JWT_SECRET;
+      if (!secret) {
+        return res.status(500).json({ success: false, message: 'Server auth configuration error' });
+      }
+
+      const decoded = jwt.verify(token, secret);
 
       req.user = await User.findById(decoded.id).select('-password');
       if (!req.user) {
@@ -23,7 +25,6 @@ const protect = async (req, res, next) => {
 
       next();
     } catch (error) {
-      console.error('Auth verification error:', error.message);
       return res.status(401).json({ success: false, message: 'Not authorized, token invalid or expired' });
     }
   } else {
@@ -51,11 +52,11 @@ const optionalProtect = async (req, res, next) => {
   ) {
     try {
       const token = req.headers.authorization.split(' ')[1];
-      const decoded = jwt.verify(
-        token,
-        process.env.JWT_SECRET || 'own_brand_super_secret_jwt_key_2026_atelier'
-      );
-      req.user = await User.findById(decoded.id).select('-password');
+      const secret = process.env.JWT_SECRET;
+      if (secret) {
+        const decoded = jwt.verify(token, secret);
+        req.user = await User.findById(decoded.id).select('-password');
+      }
     } catch (error) {
       req.user = null;
     }
