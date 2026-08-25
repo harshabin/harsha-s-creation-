@@ -1,0 +1,20 @@
+{
+  "name": "own-brand-cloth-selling-portal",
+  "version": "1.0.0",
+  "description": "Full-stack E-commerce Web Application for Own Brand Apparel",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "npm run dev --prefix backend",
+    "client": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seed": "npm run seed --prefix backend",
+    "build": "npm run build --prefix frontend"
+  },
+  "keywords": ["ecommerce", "fashion", "react", "express", "mongodb", "razorpay"],
+  "author": "Aura Wear Dev Team",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
