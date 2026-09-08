@@ -3,12 +3,12 @@ import { X, Camera, Check, Image as ImageIcon } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const PRESET_AVATARS = [
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80'
+  '/assets/founder_harsha.jpg',
+  '/assets/products/hoodie_black.jpg',
+  '/assets/products/trench_coat.jpg',
+  '/assets/reson/hero_obsidian.jpg',
+  '/assets/reson/hero_glacier.jpg',
+  '/assets/reson/hero_sage.jpg'
 ];
 
 const ProfilePhotoModal = ({ isOpen, onClose }) => {
@@ -42,19 +42,19 @@ const ProfilePhotoModal = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-stone-200 space-y-6">
-        <div className="flex items-center justify-between pb-4 border-b border-stone-100">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+      <div className="bg-[#11141B] border border-[#232A38] text-[#E1E7F0] rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-6">
+        <div className="flex items-center justify-between pb-4 border-b border-[#232A38]">
           <div className="flex items-center gap-2">
-            <Camera className="w-5 h-5 text-brand-600" />
-            <h3 className="text-lg font-bold text-stone-950 font-display">
+            <Camera className="w-5 h-5 text-[#99EEFF]" />
+            <h3 className="text-lg font-bold text-white font-display">
               Update Profile & Picture
             </h3>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-stone-400 hover:text-stone-900 rounded-full hover:bg-stone-100"
+            className="p-1.5 text-[#8B95A5] hover:text-white rounded-full hover:bg-[#161B24] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -64,8 +64,8 @@ const ProfilePhotoModal = ({ isOpen, onClose }) => {
           <div
             className={`p-3 rounded-xl text-xs font-semibold ${
               message.type === 'success'
-                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                : 'bg-rose-50 text-rose-800 border border-rose-200'
+                ? 'bg-emerald-950/40 text-emerald-300 border border-emerald-800/60'
+                : 'bg-rose-950/40 text-rose-300 border border-rose-800/60'
             }`}
           >
             {message.text}
@@ -74,28 +74,28 @@ const ProfilePhotoModal = ({ isOpen, onClose }) => {
 
         {/* Live Photo Preview */}
         <div className="flex flex-col items-center space-y-3">
-          <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-amber-400/80 shadow-md bg-stone-100 flex items-center justify-center">
+          <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-[#99EEFF] shadow-cyan-subtle bg-[#161B24] flex items-center justify-center">
             {avatarUrl ? (
               <img
                 src={avatarUrl}
                 alt="Profile Preview"
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80';
+                  e.target.src = '/assets/founder_harsha.jpg';
                 }}
               />
             ) : (
-              <span className="text-2xl font-bold uppercase text-stone-700">
+              <span className="text-2xl font-bold uppercase text-[#99EEFF] font-display">
                 {name ? name.charAt(0) : 'H'}
               </span>
             )}
           </div>
-          <p className="text-[11px] text-stone-500 font-medium">Live Avatar Preview</p>
+          <p className="text-[11px] text-[#8B95A5] font-mono uppercase tracking-wider">Live Avatar Preview</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1 font-mono">
               Your Display Name
             </label>
             <input
@@ -104,41 +104,41 @@ const ProfilePhotoModal = ({ isOpen, onClose }) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Harsha"
-              className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white focus:ring-1 focus:ring-stone-950"
+              className="w-full px-3.5 py-2.5 text-sm bg-[#161B24] border border-[#232A38] text-white rounded-xl focus:border-[#99EEFF] focus:outline-none transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
-              Your Photo (Image URL)
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1 font-mono">
+              Your Photo (Image URL or Path)
             </label>
             <input
-              type="url"
+              type="text"
               value={avatarUrl}
               onChange={(e) => setAvatarUrl(e.target.value)}
-              placeholder="https://images.unsplash.com/... or paste any direct image link"
-              className="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-300 rounded-xl focus:bg-white focus:ring-1 focus:ring-stone-950"
+              placeholder="/assets/founder_harsha.jpg or paste image link"
+              className="w-full px-3.5 py-2.5 text-xs bg-[#161B24] border border-[#232A38] text-white rounded-xl focus:border-[#99EEFF] focus:outline-none transition-colors"
             />
-            <p className="text-[10px] text-stone-400 mt-1">
-              Tip: You can paste a link from GitHub, LinkedIn, Imgur, Unsplash, or any image host.
+            <p className="text-[10px] text-[#8B95A5]/70 mt-1">
+              Select one of the brand avatars below or enter any valid image path/URL.
             </p>
           </div>
 
           {/* Preset Avatar Selection */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">
-              Or Choose a Preset Style
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-2 font-mono">
+              Or Choose Brand Preset
             </label>
-            <div className="flex gap-2 justify-center">
+            <div className="flex gap-2.5 justify-center">
               {PRESET_AVATARS.map((preset, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setAvatarUrl(preset)}
-                  className={`w-10 h-10 rounded-full overflow-hidden border-2 transition-all ${
+                  className={`w-11 h-11 rounded-full overflow-hidden border-2 transition-all ${
                     avatarUrl === preset
-                      ? 'border-amber-500 scale-110 ring-2 ring-amber-400/30'
-                      : 'border-transparent opacity-70 hover:opacity-100'
+                      ? 'border-[#99EEFF] scale-110 ring-2 ring-[#99EEFF]/40 shadow-cyan-subtle'
+                      : 'border-[#232A38] opacity-70 hover:opacity-100 hover:border-[#99EEFF]/50'
                   }`}
                 >
                   <img src={preset} alt="" className="w-full h-full object-cover" />
@@ -147,18 +147,18 @@ const ProfilePhotoModal = ({ isOpen, onClose }) => {
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-stone-100">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#232A38]">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-stone-600 hover:bg-stone-100 rounded-xl"
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#8B95A5] hover:text-white hover:bg-[#161B24] border border-[#232A38] rounded-xl transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2.5 bg-stone-950 hover:bg-stone-800 text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors disabled:opacity-50"
+              className="px-5 py-2.5 bg-[#99EEFF] hover:bg-[#B3F2FF] text-black rounded-xl text-xs font-bold uppercase tracking-wider shadow-cyan-subtle transition-all disabled:opacity-50 font-display"
             >
               {saving ? 'Saving...' : 'Save Picture'}
             </button>
@@ -170,3 +170,4 @@ const ProfilePhotoModal = ({ isOpen, onClose }) => {
 };
 
 export default ProfilePhotoModal;
+

@@ -49,7 +49,7 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
       setPrice('');
       setDiscountPrice('');
       setStock(25);
-      setImages(['https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80']);
+      setImages(['/assets/products/hoodie_black.jpg']);
       setDescription('');
       setSizes(['S', 'M', 'L', 'XL']);
       setComposition('100% Organic Heavyweight French Terry (480 GSM)');
@@ -94,7 +94,7 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
 
     const validImages = images.filter((img) => img.trim() !== '');
     if (validImages.length === 0) {
-      setError('Please provide at least one valid image URL');
+      setError('Please provide at least one valid image URL or path');
       setSaving(false);
       return;
     }
@@ -134,26 +134,26 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between pb-4 border-b border-stone-200 sticky top-0 bg-white z-10">
+    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+      <div className="bg-[#11141B] border border-[#232A38] text-[#E1E7F0] rounded-2xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between pb-4 border-b border-[#232A38] sticky top-0 bg-[#11141B]/95 backdrop-blur-sm z-10">
           <div>
-            <h3 className="text-xl font-bold text-stone-950 font-display">
+            <h3 className="text-xl font-bold text-white font-display">
               {product ? 'Edit Garment Details' : 'Add New Own-Brand Garment'}
             </h3>
-            <p className="text-xs text-stone-500">Configure specifications, stock, and imagery</p>
+            <p className="text-xs text-[#8B95A5]">Configure specifications, stock, and imagery</p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-stone-400 hover:text-stone-900 rounded-full hover:bg-stone-100"
+            className="p-1.5 text-[#8B95A5] hover:text-white rounded-full hover:bg-[#161B24] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {error && (
-          <div className="my-4 p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs font-semibold">
+          <div className="my-4 p-3 bg-rose-950/40 border border-rose-800/60 text-rose-300 rounded-xl text-xs font-semibold">
             {error}
           </div>
         )}
@@ -161,7 +161,7 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
         <form onSubmit={handleSubmit} className="mt-6 space-y-6">
           {/* Title */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1 font-mono">
               Garment Name *
             </label>
             <input
@@ -170,38 +170,38 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
               placeholder="e.g. Heavyweight Loopback French Terry Hoodie"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white focus:ring-2 focus:ring-stone-950"
+              className="w-full px-3.5 py-2.5 text-sm bg-[#161B24] border border-[#232A38] text-white rounded-xl focus:border-[#99EEFF] focus:outline-none transition-colors"
             />
           </div>
 
           {/* Category & Gender */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1 font-mono">
                 Category *
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+                className="w-full px-3.5 py-2.5 text-sm bg-[#161B24] border border-[#232A38] text-white rounded-xl focus:border-[#99EEFF] focus:outline-none transition-colors"
               >
                 {CATEGORIES.map((c) => (
-                  <option key={c} value={c}>{c}</option>
+                  <option key={c} value={c} className="bg-[#11141B] text-white">{c}</option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1 font-mono">
                 Gender Silhouette *
               </label>
               <select
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+                className="w-full px-3.5 py-2.5 text-sm bg-[#161B24] border border-[#232A38] text-white rounded-xl focus:border-[#99EEFF] focus:outline-none transition-colors"
               >
                 {GENDERS.map((g) => (
-                  <option key={g} value={g}>{g}</option>
+                  <option key={g} value={g} className="bg-[#11141B] text-white">{g}</option>
                 ))}
               </select>
             </div>
@@ -210,7 +210,7 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
           {/* Pricing & Stock */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1 font-mono">
                 Base Price (₹) *
               </label>
               <input
@@ -220,12 +220,12 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
                 placeholder="2999"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+                className="w-full px-3.5 py-2.5 text-sm bg-[#161B24] border border-[#232A38] text-white rounded-xl focus:border-[#99EEFF] focus:outline-none transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1 font-mono">
                 Discount Price (₹)
               </label>
               <input
@@ -234,12 +234,12 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
                 placeholder="2499 (optional)"
                 value={discountPrice}
                 onChange={(e) => setDiscountPrice(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+                className="w-full px-3.5 py-2.5 text-sm bg-[#161B24] border border-[#232A38] text-white rounded-xl focus:border-[#99EEFF] focus:outline-none transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1 font-mono">
                 Available Stock Units *
               </label>
               <input
@@ -248,14 +248,14 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
                 min="0"
                 value={stock}
                 onChange={(e) => setStock(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+                className="w-full px-3.5 py-2.5 text-sm bg-[#161B24] border border-[#232A38] text-white rounded-xl focus:border-[#99EEFF] focus:outline-none transition-colors"
               />
             </div>
           </div>
 
           {/* Sizes */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-2 font-mono">
               Available Sizes
             </label>
             <div className="flex flex-wrap gap-2">
@@ -266,10 +266,10 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
                     key={size}
                     type="button"
                     onClick={() => toggleSize(size)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all border ${
                       isSelected
-                        ? 'bg-stone-950 text-white border-stone-950 shadow-xs'
-                        : 'bg-stone-50 text-stone-600 border-stone-200'
+                        ? 'bg-[#99EEFF] text-black border-[#99EEFF] shadow-cyan-subtle'
+                        : 'bg-[#161B24] text-[#8B95A5] border-[#232A38] hover:border-[#99EEFF]/40'
                     }`}
                   >
                     {size}
@@ -282,35 +282,35 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
           {/* Image URLs */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-stone-700 flex items-center gap-1.5">
-                <ImageIcon className="w-3.5 h-3.5" />
-                <span>Product Images (URLs) *</span>
+              <label className="text-xs font-bold uppercase tracking-wider text-[#8B95A5] flex items-center gap-1.5 font-mono">
+                <ImageIcon className="w-3.5 h-3.5 text-[#99EEFF]" />
+                <span>Product Images (Paths or URLs) *</span>
               </label>
               <button
                 type="button"
                 onClick={handleAddImageUrl}
-                className="text-xs font-semibold text-brand-700 hover:text-brand-900 flex items-center gap-1"
+                className="text-xs font-semibold text-[#99EEFF] hover:text-[#B3F2FF] flex items-center gap-1 transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" />
-                <span>Add Image URL</span>
+                <span>Add Image Slot</span>
               </button>
             </div>
             <div className="space-y-2">
               {images.map((img, index) => (
                 <div key={index} className="flex gap-2 items-center">
                   <input
-                    type="url"
+                    type="text"
                     required
-                    placeholder="https://images.unsplash.com/..."
+                    placeholder="/assets/products/hoodie_black.jpg or image URL"
                     value={img}
                     onChange={(e) => handleImageUrlChange(index, e.target.value)}
-                    className="flex-1 px-3 py-2 text-xs bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+                    className="flex-1 px-3 py-2 text-xs bg-[#161B24] border border-[#232A38] text-white rounded-xl focus:border-[#99EEFF] focus:outline-none transition-colors"
                   />
                   {images.length > 1 && (
                     <button
                       type="button"
                       onClick={() => handleRemoveImageUrl(index)}
-                      className="p-2 text-stone-400 hover:text-rose-600 rounded-lg hover:bg-stone-100"
+                      className="p-2 text-[#8B95A5] hover:text-rose-400 rounded-lg hover:bg-[#161B24] transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -322,7 +322,7 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
 
           {/* Description */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1 font-mono">
               Garment Description *
             </label>
             <textarea
@@ -331,41 +331,42 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
               placeholder="Detail the cut, drape, custom hardware, styling advice..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+              className="w-full px-3.5 py-2 text-sm bg-[#161B24] border border-[#232A38] text-white rounded-xl focus:border-[#99EEFF] focus:outline-none transition-colors"
             />
           </div>
 
           {/* Fabric & Fit Details */}
-          <div className="p-4 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-800">
+          <div className="p-4 bg-[#161B24]/70 rounded-2xl border border-[#232A38] space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white font-mono flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#99EEFF]"></span>
               Fabric Composition & Care Details
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="block text-[11px] font-semibold text-stone-600 mb-1">Composition</label>
+                <label className="block text-[11px] font-semibold text-[#8B95A5] mb-1">Composition</label>
                 <input
                   type="text"
                   value={composition}
                   onChange={(e) => setComposition(e.target.value)}
-                  className="w-full px-3 py-1.5 text-xs bg-white border border-stone-300 rounded-lg"
+                  className="w-full px-3 py-1.5 text-xs bg-[#11141B] border border-[#232A38] text-white rounded-lg focus:border-[#99EEFF] focus:outline-none"
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-semibold text-stone-600 mb-1">Care Guide</label>
+                <label className="block text-[11px] font-semibold text-[#8B95A5] mb-1">Care Guide</label>
                 <input
                   type="text"
                   value={care}
                   onChange={(e) => setCare(e.target.value)}
-                  className="w-full px-3 py-1.5 text-xs bg-white border border-stone-300 rounded-lg"
+                  className="w-full px-3 py-1.5 text-xs bg-[#11141B] border border-[#232A38] text-white rounded-lg focus:border-[#99EEFF] focus:outline-none"
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-semibold text-stone-600 mb-1">Fit Silhouette</label>
+                <label className="block text-[11px] font-semibold text-[#8B95A5] mb-1">Fit Silhouette</label>
                 <input
                   type="text"
                   value={fit}
                   onChange={(e) => setFit(e.target.value)}
-                  className="w-full px-3 py-1.5 text-xs bg-white border border-stone-300 rounded-lg"
+                  className="w-full px-3 py-1.5 text-xs bg-[#11141B] border border-[#232A38] text-white rounded-lg focus:border-[#99EEFF] focus:outline-none"
                 />
               </div>
             </div>
@@ -378,9 +379,9 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
                 type="checkbox"
                 checked={isFeatured}
                 onChange={(e) => setIsFeatured(e.target.checked)}
-                className="w-4 h-4 rounded text-brand-600 focus:ring-brand-500"
+                className="w-4 h-4 rounded accent-[#99EEFF]"
               />
-              <span className="text-xs font-semibold text-stone-700">Feature on Homepage</span>
+              <span className="text-xs font-semibold text-[#E1E7F0]">Feature on Homepage</span>
             </label>
 
             <label className="flex items-center gap-2 cursor-pointer">
@@ -388,25 +389,25 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
                 type="checkbox"
                 checked={isNewArrival}
                 onChange={(e) => setIsNewArrival(e.target.checked)}
-                className="w-4 h-4 rounded text-brand-600 focus:ring-brand-500"
+                className="w-4 h-4 rounded accent-[#99EEFF]"
               />
-              <span className="text-xs font-semibold text-stone-700">Mark as New Drop</span>
+              <span className="text-xs font-semibold text-[#E1E7F0]">Mark as New Drop</span>
             </label>
           </div>
 
           {/* Form Actions */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-stone-200">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#232A38]">
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-stone-700 hover:bg-stone-100 rounded-xl"
+              className="px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#8B95A5] hover:text-white hover:bg-[#161B24] border border-[#232A38] rounded-xl transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="px-6 py-2.5 bg-stone-950 hover:bg-stone-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-colors disabled:opacity-50"
+              className="px-6 py-2.5 bg-[#99EEFF] hover:bg-[#B3F2FF] text-black text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-cyan-subtle disabled:opacity-50 font-display"
             >
               {saving ? 'Saving...' : product ? 'Update Product' : 'Create Product'}
             </button>
@@ -418,3 +419,4 @@ const ProductModal = ({ isOpen, onClose, product, onSaveSuccess }) => {
 };
 
 export default ProductModal;
+

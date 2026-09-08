@@ -88,7 +88,7 @@ const CartPage = () => {
           <div className="bg-white rounded-3xl border border-stone-200 divide-y divide-stone-100 overflow-hidden shadow-sm">
             {cartItems.map((item) => {
               const prod = item.product || {};
-              const image = prod.images?.[0] || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=300&q=80';
+              const image = prod.images?.[0] || '/assets/products/hoodie_black.jpg';
               const name = prod.name || item.name || 'Apparel Item';
               const price = prod.discountPrice > 0 ? prod.discountPrice : (prod.price || item.price || 0);
 

@@ -159,7 +159,7 @@ const CheckoutPage = () => {
         currency: currency,
         name: "Harsha's Creation Atelier",
         description: `Order #${createdOrder._id.slice(-6).toUpperCase()}`,
-        image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=120&q=80',
+        image: '/assets/products/hoodie_black.jpg',
         order_id: razorpayOrderId,
         handler: async function (response) {
           try {
@@ -435,7 +435,7 @@ const CheckoutPage = () => {
             <div className="max-h-60 overflow-y-auto space-y-3 pr-1">
               {cartItems.map((item) => {
                 const prod = item.product || {};
-                const image = prod.images?.[0] || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=200&q=80';
+                const image = prod.images?.[0] || '/assets/products/hoodie_black.jpg';
                 const name = prod.name || item.name || 'Apparel Item';
                 const price = prod.discountPrice > 0 ? prod.discountPrice : (prod.price || item.price || 0);
 

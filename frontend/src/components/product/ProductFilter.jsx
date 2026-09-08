@@ -18,29 +18,29 @@ const ProductFilter = ({
   onResetFilters
 }) => {
   return (
-    <div className="bg-white rounded-2xl border border-stone-200 p-6 space-y-6 shadow-sm">
+    <div className="bg-[#11141B] rounded-3xl border border-[#232A38] p-6 space-y-6 shadow-card text-[#E1E7F0]">
       {/* Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-stone-100">
+      <div className="flex items-center justify-between pb-4 border-b border-[#1E2430]">
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-stone-700" />
-          <h3 className="text-sm font-bold uppercase tracking-wider text-stone-950 font-display">
-            Refine Catalog
+          <Filter className="w-4 h-4 text-[#99EEFF]" />
+          <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white font-display">
+            Refine Atelier
           </h3>
         </div>
         <button
           type="button"
           onClick={onResetFilters}
-          className="text-xs font-semibold text-stone-500 hover:text-stone-900 flex items-center gap-1 transition-colors"
+          className="text-[11px] font-semibold text-[#8B95A5] hover:text-[#99EEFF] flex items-center gap-1 transition-colors"
         >
-          <RotateCcw className="w-3.5 h-3.5" />
+          <RotateCcw className="w-3 h-3" />
           <span>Reset</span>
         </button>
       </div>
 
       {/* Categories */}
       <div>
-        <h4 className="text-xs font-bold uppercase tracking-wider text-stone-700 mb-3">
-          Category
+        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8B95A5] mb-3">
+          Silhouette Category
         </h4>
         <div className="space-y-1.5">
           {CATEGORIES.map((cat) => {
@@ -50,14 +50,14 @@ const ProductFilter = ({
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat === 'All' ? '' : cat)}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-colors flex items-center justify-between ${
+                className={`w-full text-left px-3.5 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between ${
                   isSelected
-                    ? 'bg-stone-950 text-white font-semibold shadow-sm'
-                    : 'text-stone-600 hover:bg-stone-100'
+                    ? 'bg-[#99EEFF] text-black font-bold shadow-cyan-subtle'
+                    : 'text-[#8B95A5] hover:bg-[#161B24] hover:text-white'
                 }`}
               >
                 <span>{cat}</span>
-                {isSelected && <Check className="w-3.5 h-3.5" />}
+                {isSelected && <Check className="w-3.5 h-3.5 stroke-[2.5]" />}
               </button>
             );
           })}
@@ -65,9 +65,9 @@ const ProductFilter = ({
       </div>
 
       {/* Gender Selection */}
-      <div className="pt-4 border-t border-stone-100">
-        <h4 className="text-xs font-bold uppercase tracking-wider text-stone-700 mb-3">
-          Gender / Collection
+      <div className="pt-4 border-t border-[#1E2430]">
+        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8B95A5] mb-3">
+          Gender / Line
         </h4>
         <div className="grid grid-cols-2 gap-2">
           {GENDERS.map((gender) => {
@@ -77,10 +77,10 @@ const ProductFilter = ({
                 key={gender}
                 type="button"
                 onClick={() => setSelectedGender(gender === 'All' ? '' : gender)}
-                className={`py-2 px-3 rounded-xl text-xs font-medium text-center transition-all ${
+                className={`py-2 px-3 rounded-full text-xs font-medium text-center transition-all ${
                   isSelected
-                    ? 'bg-brand-600 text-white font-bold shadow-sm'
-                    : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                    ? 'bg-[#99EEFF] text-black font-bold shadow-cyan-subtle'
+                    : 'bg-[#161B24] border border-[#232A38] text-[#8B95A5] hover:text-white hover:border-[#99EEFF]/40'
                 }`}
               >
                 {gender}
@@ -91,9 +91,9 @@ const ProductFilter = ({
       </div>
 
       {/* Sizes Selection */}
-      <div className="pt-4 border-t border-stone-100">
-        <h4 className="text-xs font-bold uppercase tracking-wider text-stone-700 mb-3">
-          Size
+      <div className="pt-4 border-t border-[#1E2430]">
+        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8B95A5] mb-3">
+          Measurement / Size
         </h4>
         <div className="grid grid-cols-3 gap-2">
           {SIZES.map((size) => {
@@ -103,10 +103,10 @@ const ProductFilter = ({
                 key={size}
                 type="button"
                 onClick={() => setSelectedSize(selectedSize === size ? '' : size)}
-                className={`py-2 rounded-xl text-xs font-bold transition-all border ${
+                className={`py-2 rounded-full text-xs font-bold transition-all border ${
                   isSelected
-                    ? 'bg-stone-950 text-white border-stone-950 shadow-sm'
-                    : 'bg-white text-stone-800 border-stone-200 hover:border-stone-400'
+                    ? 'bg-[#99EEFF] text-black border-[#99EEFF] shadow-cyan-subtle'
+                    : 'bg-[#161B24] border-[#232A38] text-[#8B95A5] hover:text-white hover:border-[#99EEFF]/40'
                 }`}
               >
                 {size}
@@ -117,13 +117,13 @@ const ProductFilter = ({
       </div>
 
       {/* Price Range Slider */}
-      <div className="pt-4 border-t border-stone-100">
+      <div className="pt-4 border-t border-[#1E2430]">
         <div className="flex items-center justify-between mb-3">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-stone-700">
-            Price Range
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8B95A5]">
+            Upper Price Limit
           </h4>
-          <span className="text-xs font-bold text-stone-950">
-            Up to {formatCurrency(priceRange)}
+          <span className="text-xs font-bold text-[#99EEFF]">
+            {formatCurrency(priceRange)}
           </span>
         </div>
         <input
@@ -133,9 +133,9 @@ const ProductFilter = ({
           step="250"
           value={priceRange}
           onChange={(e) => setPriceRange(Number(e.target.value))}
-          className="w-full h-1.5 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-stone-950"
+          className="w-full h-1.5 bg-[#1E2430] rounded-lg appearance-none cursor-pointer accent-[#99EEFF]"
         />
-        <div className="flex justify-between text-[10px] text-stone-400 font-semibold mt-1">
+        <div className="flex justify-between text-[10px] text-[#8B95A5] font-semibold mt-1.5">
           <span>₹500</span>
           <span>₹8,000+</span>
         </div>

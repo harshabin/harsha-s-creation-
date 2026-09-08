@@ -39,14 +39,14 @@ const AdminOrdersPage = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-[#E1E7F0]">
       {/* Top Bar */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-950 font-display">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
           Customer Orders & Fulfillment
         </h1>
-        <p className="text-xs text-stone-500 mt-1">
-          Review customer shipments, update fulfillment stages, and attach tracking numbers
+        <p className="text-xs text-[#8B95A5] mt-1">
+          Review atelier shipments, update fulfillment stages, and attach tracking credentials
         </p>
       </div>
 
@@ -57,10 +57,10 @@ const AdminOrdersPage = () => {
             key={st}
             type="button"
             onClick={() => setSelectedStatus(st)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider font-display transition-all ${
               selectedStatus === st
-                ? 'bg-stone-950 text-white shadow-sm'
-                : 'bg-white text-stone-600 border border-stone-200 hover:bg-stone-50'
+                ? 'bg-[#99EEFF] text-black shadow-cyan-subtle'
+                : 'bg-[#11141B] text-[#8B95A5] border border-[#232A38] hover:border-[#99EEFF]/40 hover:text-white'
             }`}
           >
             {st}
@@ -69,15 +69,15 @@ const AdminOrdersPage = () => {
       </div>
 
       {/* Orders Table */}
-      <div className="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-sm">
+      <div className="bg-[#11141B] rounded-3xl border border-[#232A38] overflow-hidden shadow-2xl">
         {loading ? (
-          <div className="p-8 text-center text-xs text-stone-400">Loading customer orders...</div>
+          <div className="p-12 text-center text-xs text-[#8B95A5] animate-pulse">Loading atelier orders...</div>
         ) : orders.length === 0 ? (
-          <div className="p-12 text-center text-xs text-stone-400">No orders found for this filter</div>
+          <div className="p-12 text-center text-xs text-[#8B95A5]">No orders found for this filter</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-stone-50 border-b border-stone-200 text-stone-600 font-bold uppercase tracking-wider">
+              <thead className="bg-[#161B24] border-b border-[#1E2430] text-[#8B95A5] font-bold uppercase tracking-wider">
                 <tr>
                   <th className="p-4">Order Ref</th>
                   <th className="p-4">Customer</th>
@@ -89,32 +89,32 @@ const AdminOrdersPage = () => {
                   <th className="p-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-100">
+              <tbody className="divide-y divide-[#1E2430]">
                 {orders.map((order) => (
-                  <tr key={order._id} className="hover:bg-stone-50/60 transition-colors">
-                    <td className="p-4 font-mono font-bold text-stone-950">
+                  <tr key={order._id} className="hover:bg-[#161B24]/60 transition-colors">
+                    <td className="p-4 font-mono font-bold text-white">
                       #{order._id.slice(-6).toUpperCase()}
-                      <span className="block text-[10px] text-stone-400 font-normal">
+                      <span className="block text-[10px] text-[#8B95A5] font-normal font-sans">
                         {formatDate(order.createdAt)}
                       </span>
                     </td>
 
                     <td className="p-4">
-                      <p className="font-bold text-stone-900">{order.user?.name || order.shippingAddress?.fullName}</p>
-                      <p className="text-stone-400 text-[11px]">{order.user?.email || order.shippingAddress?.phone}</p>
+                      <p className="font-bold text-white">{order.user?.name || order.shippingAddress?.fullName}</p>
+                      <p className="text-[#8B95A5] text-[11px]">{order.user?.email || order.shippingAddress?.phone}</p>
                     </td>
 
                     <td className="p-4">
-                      <span className="font-semibold text-stone-800">
+                      <span className="font-semibold text-[#E1E7F0]">
                         {order.items.reduce((acc, itm) => acc + itm.quantity, 0)} units
                       </span>
-                      <p className="text-[10px] text-stone-400 truncate max-w-[120px]">
+                      <p className="text-[10px] text-[#8B95A5] truncate max-w-[120px]">
                         {order.items[0]?.name}
                         {order.items.length > 1 ? ` +${order.items.length - 1} more` : ''}
                       </p>
                     </td>
 
-                    <td className="p-4 font-extrabold text-stone-950">
+                    <td className="p-4 font-extrabold text-[#99EEFF] font-display">
                       {formatCurrency(order.totalAmount)}
                     </td>
 
@@ -122,7 +122,7 @@ const AdminOrdersPage = () => {
                       <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${getStatusBadgeColor(order.paymentStatus)}`}>
                         {order.paymentStatus}
                       </span>
-                      <span className="block text-[10px] text-stone-400 mt-0.5">
+                      <span className="block text-[10px] text-[#8B95A5] mt-0.5">
                         {order.paymentMethod}
                       </span>
                     </td>
@@ -133,14 +133,14 @@ const AdminOrdersPage = () => {
                       </span>
                     </td>
 
-                    <td className="p-4 font-mono text-[11px] text-stone-600">
+                    <td className="p-4 font-mono text-[11px]">
                       {order.trackingNumber ? (
                         <div>
-                          <span className="font-semibold text-stone-900">{order.trackingNumber}</span>
-                          <span className="block text-[10px] text-stone-400">{order.carrier}</span>
+                          <span className="font-semibold text-white">{order.trackingNumber}</span>
+                          <span className="block text-[10px] text-[#8B95A5] font-sans">{order.carrier}</span>
                         </div>
                       ) : (
-                        <span className="text-stone-400 italic">Unassigned</span>
+                        <span className="text-[#8B95A5] italic font-sans">Unassigned</span>
                       )}
                     </td>
 
@@ -148,7 +148,7 @@ const AdminOrdersPage = () => {
                       <button
                         type="button"
                         onClick={() => handleUpdateStatus(order)}
-                        className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors"
+                        className="px-3.5 py-1.5 bg-[#161B24] hover:bg-[#1E2430] border border-[#232A38] text-[#99EEFF] hover:border-[#99EEFF]/40 rounded-full text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 transition-all shadow-sm font-display"
                       >
                         <Edit3 className="w-3.5 h-3.5" />
                         <span>Update</span>

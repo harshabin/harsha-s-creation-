@@ -9,7 +9,7 @@ const OrderStatusModal = ({ isOpen, onClose, order, onUpdateSuccess }) => {
   const [status, setStatus] = useState('Processing');
   const [paymentStatus, setPaymentStatus] = useState('Paid');
   const [trackingNumber, setTrackingNumber] = useState('');
-  const [carrier, setCarrier] = useState('Aura Logistics Express');
+  const [carrier, setCarrier] = useState("Harsha's Creation Express");
   const [notes, setNotes] = useState('');
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ const OrderStatusModal = ({ isOpen, onClose, order, onUpdateSuccess }) => {
       setStatus(order.status || 'Placed');
       setPaymentStatus(order.paymentStatus || 'Pending');
       setTrackingNumber(order.trackingNumber || '');
-      setCarrier(order.carrier || 'Aura Logistics Express');
+      setCarrier(order.carrier || "Harsha's Creation Express");
       setNotes(order.notes || '');
     }
   }, [order, isOpen]);
@@ -49,112 +49,112 @@ const OrderStatusModal = ({ isOpen, onClose, order, onUpdateSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
-        <div className="flex items-center justify-between pb-4 border-b border-stone-200">
+    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in text-[#E1E7F0]">
+      <div className="bg-[#11141B] rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#232A38] relative">
+        <div className="flex items-center justify-between pb-4 border-b border-[#1E2430]">
           <div>
-            <h3 className="text-lg font-bold text-stone-950 font-display">
+            <h3 className="text-lg font-bold text-white font-display">
               Update Order #{order._id.slice(-6).toUpperCase()}
             </h3>
-            <p className="text-xs text-stone-500">Customer: {order.user?.name || order.shippingAddress?.fullName}</p>
+            <p className="text-xs text-[#8B95A5]">Customer: {order.user?.name || order.shippingAddress?.fullName}</p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-stone-400 hover:text-stone-900 rounded-full hover:bg-stone-100"
+            className="p-1.5 text-[#8B95A5] hover:text-white rounded-full hover:bg-[#161B24] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {error && (
-          <div className="my-4 p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs font-semibold">
+          <div className="my-4 p-3 bg-rose-950/60 border border-rose-800/60 text-rose-400 rounded-xl text-xs font-semibold">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1.5">
               Fulfillment Status
             </label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl font-medium focus:bg-white"
+              className="w-full px-3.5 py-2.5 text-sm bg-[#161B24] border border-[#232A38] rounded-xl font-medium text-white focus:border-[#99EEFF] focus:outline-none"
             >
               {STATUSES.map((s) => (
-                <option key={s} value={s}>{s}</option>
+                <option key={s} value={s} className="bg-[#11141B] text-white">{s}</option>
               ))}
             </select>
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1.5">
               Payment Status
             </label>
             <select
               value={paymentStatus}
               onChange={(e) => setPaymentStatus(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl font-medium focus:bg-white"
+              className="w-full px-3.5 py-2.5 text-sm bg-[#161B24] border border-[#232A38] rounded-xl font-medium text-white focus:border-[#99EEFF] focus:outline-none"
             >
               {PAYMENT_STATUSES.map((ps) => (
-                <option key={ps} value={ps}>{ps}</option>
+                <option key={ps} value={ps} className="bg-[#11141B] text-white">{ps}</option>
               ))}
             </select>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1.5">
                 Logistics Carrier
               </label>
               <input
                 type="text"
                 value={carrier}
                 onChange={(e) => setCarrier(e.target.value)}
-                className="w-full px-3 py-2 text-xs bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+                className="w-full px-3.5 py-2 text-xs bg-[#161B24] border border-[#232A38] rounded-xl text-white focus:border-[#99EEFF] focus:outline-none"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1.5">
                 Tracking Number
               </label>
               <input
                 type="text"
-                placeholder="e.g. AURA-EXP-9921"
+                placeholder="e.g. HC-EXP-9921"
                 value={trackingNumber}
                 onChange={(e) => setTrackingNumber(e.target.value)}
-                className="w-full px-3 py-2 text-xs bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+                className="w-full px-3.5 py-2 text-xs bg-[#161B24] border border-[#232A38] rounded-xl text-white placeholder-[#8B95A5] focus:border-[#99EEFF] focus:outline-none font-mono"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-1.5">
               Internal Fulfillment Notes
             </label>
             <textarea
               rows="2"
-              placeholder="e.g. Dispatched from Indiranagar hub via Bluedart air"
+              placeholder="e.g. Dispatched from Bengaluru atelier via express priority air"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full px-3 py-2 text-xs bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+              className="w-full px-3.5 py-2 text-xs bg-[#161B24] border border-[#232A38] rounded-xl text-white placeholder-[#8B95A5] focus:border-[#99EEFF] focus:outline-none"
             />
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-stone-200">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#1E2430]">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-stone-600 hover:bg-stone-100 rounded-xl"
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#8B95A5] hover:text-white transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={updating}
-              className="px-5 py-2.5 bg-stone-950 hover:bg-stone-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-colors disabled:opacity-50"
+              className="px-6 py-2.5 bg-[#99EEFF] hover:bg-[#B8F4FF] text-black text-xs font-bold uppercase tracking-widest font-display rounded-full transition-all shadow-cyan-subtle disabled:opacity-50"
             >
               {updating ? 'Updating...' : 'Save Changes'}
             </button>

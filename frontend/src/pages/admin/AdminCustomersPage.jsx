@@ -25,27 +25,27 @@ const AdminCustomersPage = () => {
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-[#E1E7F0]">
       {/* Top Bar */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-950 font-display">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
           Customer Directory & Lifetime Value
         </h1>
-        <p className="text-xs text-stone-500 mt-1">
+        <p className="text-xs text-[#8B95A5] mt-1">
           Registered patrons, purchase history metrics, and customer contact records
         </p>
       </div>
 
       {/* Customer Directory Table */}
-      <div className="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-sm">
+      <div className="bg-[#11141B] rounded-3xl border border-[#232A38] overflow-hidden shadow-2xl">
         {loading ? (
-          <div className="p-8 text-center text-xs text-stone-400">Loading customers...</div>
+          <div className="p-12 text-center text-xs text-[#8B95A5] animate-pulse">Loading patrons...</div>
         ) : customers.length === 0 ? (
-          <div className="p-12 text-center text-xs text-stone-400">No registered customers yet</div>
+          <div className="p-12 text-center text-xs text-[#8B95A5]">No registered patrons yet</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-stone-50 border-b border-stone-200 text-stone-600 font-bold uppercase tracking-wider">
+              <thead className="bg-[#161B24] border-b border-[#1E2430] text-[#8B95A5] font-bold uppercase tracking-wider">
                 <tr>
                   <th className="p-4">Customer</th>
                   <th className="p-4">Email</th>
@@ -55,28 +55,28 @@ const AdminCustomersPage = () => {
                   <th className="p-4 text-right">Member Since</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-100">
+              <tbody className="divide-y divide-[#1E2430]">
                 {customers.map((c) => (
-                  <tr key={c._id} className="hover:bg-stone-50/60 transition-colors">
+                  <tr key={c._id} className="hover:bg-[#161B24]/60 transition-colors">
                     <td className="p-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center font-bold text-xs uppercase">
+                        <div className="w-8 h-8 rounded-full bg-[#161B24] border border-[#232A38] text-[#99EEFF] flex items-center justify-center font-bold text-xs uppercase font-display">
                           {c.name.charAt(0)}
                         </div>
-                        <span className="font-bold text-stone-900">{c.name}</span>
+                        <span className="font-bold text-white">{c.name}</span>
                       </div>
                     </td>
-                    <td className="p-4 text-stone-600 font-medium">{c.email}</td>
-                    <td className="p-4 text-stone-600">{c.phone || '-'}</td>
+                    <td className="p-4 text-[#8B95A5] font-medium">{c.email}</td>
+                    <td className="p-4 text-[#8B95A5]">{c.phone || '-'}</td>
                     <td className="p-4">
-                      <span className="px-2.5 py-1 bg-stone-100 rounded-full font-bold text-stone-800">
+                      <span className="px-2.5 py-1 bg-[#161B24] border border-[#232A38] rounded-full font-bold text-white">
                         {c.orderCount || 0} orders
                       </span>
                     </td>
-                    <td className="p-4 font-bold text-emerald-700">
+                    <td className="p-4 font-bold text-[#99EEFF] font-display">
                       {formatCurrency(c.totalSpent || 0)}
                     </td>
-                    <td className="p-4 text-right text-stone-400">
+                    <td className="p-4 text-right text-[#8B95A5]">
                       {formatDate(c.createdAt)}
                     </td>
                   </tr>

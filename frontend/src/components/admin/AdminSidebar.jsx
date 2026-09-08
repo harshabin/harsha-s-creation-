@@ -26,23 +26,17 @@ const AdminSidebar = () => {
 
   return (
     <>
-      <aside className="w-64 bg-stone-950 text-stone-300 min-h-[calc(100vh-80px)] p-4 flex flex-col justify-between border-r border-stone-800">
+      <aside className="w-64 bg-[#0C0E14] text-[#8B95A5] min-h-[calc(100vh-80px)] p-4 flex flex-col justify-between border-r border-[#1E2430]">
         <div className="space-y-6">
           {/* Admin Profile Card */}
-          <div className="p-3.5 bg-stone-900/90 rounded-2xl border border-stone-800 flex items-center gap-3">
+          <div className="p-3.5 bg-[#11141B] rounded-2xl border border-[#232A38] flex items-center gap-3 shadow-md">
             <div className="relative group flex-shrink-0">
-              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-amber-400 bg-stone-800 flex items-center justify-center">
-                {user?.avatar ? (
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-base font-bold text-white uppercase">
-                    {user?.name ? user.name.charAt(0) : 'H'}
-                  </span>
-                )}
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#99EEFF] bg-[#161B24] shadow-cyan-subtle flex items-center justify-center">
+                <img
+                  src={user?.avatar || '/assets/founder_harsha.jpg'}
+                  alt={user?.name || 'Harsha'}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <button
                 type="button"
@@ -50,61 +44,61 @@ const AdminSidebar = () => {
                 className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity"
                 title="Change Photo"
               >
-                <Camera className="w-4 h-4" />
+                <Camera className="w-4 h-4 text-[#99EEFF]" />
               </button>
             </div>
 
             <div className="overflow-hidden flex-1">
               <div className="flex items-center justify-between">
-                <p className="text-xs font-bold text-white truncate max-w-[100px]">
+                <p className="text-xs font-bold text-white font-display truncate max-w-[100px]">
                   {user?.name || 'Harsha'}
                 </p>
                 <button
                   type="button"
                   onClick={() => setPhotoModalOpen(true)}
-                  className="text-stone-400 hover:text-amber-400 transition-colors p-0.5"
+                  className="text-[#8B95A5] hover:text-[#99EEFF] transition-colors p-0.5"
                   title="Edit Picture"
                 >
                   <Edit3 className="w-3.5 h-3.5" />
                 </button>
               </div>
-              <span className="inline-block text-[9px] font-bold text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded border border-amber-400/20 uppercase tracking-wider mt-0.5">
-                Owner • Admin
+              <span className="inline-block text-[9px] font-bold text-[#99EEFF] bg-[#99EEFF]/15 px-2 py-0.5 rounded-full border border-[#99EEFF]/30 uppercase tracking-widest font-display mt-0.5">
+                Founder • Admin
               </span>
             </div>
           </div>
 
-        <nav className="space-y-1">
-          {menuItems.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.path}
-              end={item.exact}
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all ${
-                  isActive
-                    ? 'bg-amber-500 text-stone-950 font-bold shadow-md'
-                    : 'text-stone-400 hover:bg-stone-900 hover:text-white'
-                }`
-              }
-            >
-              <item.icon className="w-4 h-4" />
-              <span>{item.name}</span>
-            </NavLink>
-          ))}
-        </nav>
-      </div>
+          <nav className="space-y-1.5">
+            {menuItems.map((item) => (
+              <NavLink
+                key={item.name}
+                to={item.path}
+                end={item.exact}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all ${
+                    isActive
+                      ? 'bg-[#99EEFF] text-black font-bold font-display shadow-cyan-subtle'
+                      : 'text-[#8B95A5] hover:bg-[#161B24] hover:text-white'
+                  }`
+                }
+              >
+                <item.icon className="w-4 h-4" />
+                <span>{item.name}</span>
+              </NavLink>
+            ))}
+          </nav>
+        </div>
 
-      <div className="pt-6 border-t border-stone-800">
-        <Link
-          to="/"
-          className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-stone-400 hover:text-white hover:bg-stone-900 transition-colors"
-        >
-          <span>View Public Store</span>
-          <ExternalLink className="w-3.5 h-3.5" />
-        </Link>
-      </div>
-    </aside>
+        <div className="pt-6 border-t border-[#1E2430]">
+          <Link
+            to="/"
+            className="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium text-[#8B95A5] hover:text-[#99EEFF] hover:bg-[#161B24] transition-all"
+          >
+            <span>View Public Store</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      </aside>
 
     <ProfilePhotoModal
       isOpen={photoModalOpen}
