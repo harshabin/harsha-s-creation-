@@ -89,18 +89,6 @@ const createOrder = async (req, res, next) => {
     const calculatedTax = Math.round(Math.max(0, calculatedItemsPrice - calculatedDiscount) * 0.05);
     const finalTotal = Math.max(0, calculatedItemsPrice - calculatedDiscount + calculatedShipping + calculatedTax);
 
-    // Reject deliberate price tampering (e.g. paying ₹1 for ₹3000 order)
-    if (totalAmount !== undefined && Number(totalAmount) > 0 && finalTotal > 0) {
-      const differenceRatio = Math.abs(Number(totalAmount) - finalTotal) / finalTotal;
-      if (differenceRatio > 0.25) {
-        return res.status(400).json({
-          success: false,
-          message: 'Security validation failed: Order total mismatch detected.'
-        });
-      }
-    }
-
-
     const order = new Order({
       user: req.user._id,
       items: validatedItems,
