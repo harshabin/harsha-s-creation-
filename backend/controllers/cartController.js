@@ -58,7 +58,15 @@ const addToCart = async (req, res, next) => {
       return res.status(404).json({ success: false, message: 'Product not found' });
     }
 
-    if (product.stock < quantity) {
+    const qty = Number(quantity);
+    if (!Number.isInteger(qty) || qty < 1 || qty > 20) {
+      return res.status(400).json({
+        success: false,
+        message: 'Quantity must be a valid integer between 1 and 20'
+      });
+    }
+
+    if (product.stock < qty) {
       return res.status(400).json({
         success: false,
         message: `Only ${product.stock} units available in stock`
@@ -81,7 +89,7 @@ const addToCart = async (req, res, next) => {
     );
 
     if (existingIndex > -1) {
-      const newQty = cart.items[existingIndex].quantity + Number(quantity);
+      const newQty = cart.items[existingIndex].quantity + qty;
       if (newQty > product.stock) {
         return res.status(400).json({
           success: false,
@@ -95,7 +103,7 @@ const addToCart = async (req, res, next) => {
         product: productId,
         size,
         color,
-        quantity: Number(quantity),
+        quantity: qty,
         price
       });
     }
@@ -136,10 +144,11 @@ const updateCartItem = async (req, res, next) => {
     const { itemId } = req.params;
     const { quantity } = req.body;
 
-    if (quantity === undefined || quantity < 1) {
+    const qty = Number(quantity);
+    if (!Number.isInteger(qty) || qty < 1 || qty > 20) {
       return res.status(400).json({
         success: false,
-        message: 'Quantity must be at least 1'
+        message: 'Quantity must be a valid integer between 1 and 20'
       });
     }
 
@@ -154,14 +163,14 @@ const updateCartItem = async (req, res, next) => {
     }
 
     const product = await Product.findById(item.product);
-    if (product && quantity > product.stock) {
+    if (product && qty > product.stock) {
       return res.status(400).json({
         success: false,
         message: `Only ${product.stock} units available in stock`
       });
     }
 
-    item.quantity = Number(quantity);
+    item.quantity = qty;
     await cart.save();
 
     const populatedCart = await Cart.findById(cart._id).populate({

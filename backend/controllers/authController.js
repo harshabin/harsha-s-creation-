@@ -64,7 +64,7 @@ const loginUser = async (req, res, next) => {
       });
     }
 
-    const user = await User.findOne({ email: email.toLowerCase() });
+    const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
 
     if (user && (await user.matchPassword(password))) {
       res.json({

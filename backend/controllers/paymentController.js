@@ -108,20 +108,43 @@ const verifyPayment = async (req, res, next) => {
       return res.status(404).json({ success: false, message: 'Order not found' });
     }
 
+    const isProd = process.env.NODE_ENV === 'production';
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
     let isValid = false;
 
-    if (isSimulator || !keySecret || keySecret.includes('demo')) {
-      // Simulator verification
+    // Strict security: Never allow simulation in production
+    if (isProd && isSimulator) {
+      return res.status(403).json({
+        success: false,
+        message: 'Payment simulation is strictly forbidden in production mode'
+      });
+    }
+
+    if (!isProd && (isSimulator || !keySecret || keySecret.includes('demo'))) {
+      // Allowed only in non-production demo environments
       isValid = true;
     } else {
-      // Cryptographic HMAC SHA256 Signature Verification
+      if (!keySecret) {
+        return res.status(500).json({ success: false, message: 'Payment gateway configuration error' });
+      }
+
+      if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+        return res.status(400).json({ success: false, message: 'Missing payment signature verification parameters' });
+      }
+
+      // Cryptographic HMAC SHA256 Signature Verification with constant-time comparison
       const generatedSignature = crypto
         .createHmac('sha256', keySecret)
         .update(`${razorpay_order_id}|${razorpay_payment_id}`)
         .digest('hex');
 
-      isValid = generatedSignature === razorpay_signature;
+      try {
+        const genBuffer = Buffer.from(generatedSignature, 'hex');
+        const sigBuffer = Buffer.from(razorpay_signature, 'hex');
+        isValid = genBuffer.length === sigBuffer.length && crypto.timingSafeEqual(genBuffer, sigBuffer);
+      } catch (err) {
+        isValid = false;
+      }
     }
 
     if (!isValid) {
@@ -163,19 +186,36 @@ const verifyPayment = async (req, res, next) => {
 const handleWebhook = async (req, res, next) => {
   try {
     const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
+    const isProd = process.env.NODE_ENV === 'production';
+
+    // In production, webhook secret is mandatory
+    if (isProd && !webhookSecret) {
+      return res.status(500).json({ success: false, message: 'Webhook configuration error' });
+    }
 
     if (webhookSecret) {
       const signature = req.headers['x-razorpay-signature'];
+      if (!signature) {
+        return res.status(400).json({ success: false, message: 'Missing webhook signature header' });
+      }
+
       const body = JSON.stringify(req.body);
       const expectedSignature = crypto
         .createHmac('sha256', webhookSecret)
         .update(body)
         .digest('hex');
 
-      if (signature !== expectedSignature) {
-        return res.status(400).json({ success: false, message: 'Invalid webhook signature' });
+      try {
+        const expBuffer = Buffer.from(expectedSignature, 'hex');
+        const sigBuffer = Buffer.from(signature, 'hex');
+        if (expBuffer.length !== sigBuffer.length || !crypto.timingSafeEqual(expBuffer, sigBuffer)) {
+          return res.status(400).json({ success: false, message: 'Invalid webhook signature' });
+        }
+      } catch (e) {
+        return res.status(400).json({ success: false, message: 'Malformed webhook signature' });
       }
     }
+
 
     const event = req.body.event;
     console.log(`📡 Razorpay Webhook Event received: ${event}`);

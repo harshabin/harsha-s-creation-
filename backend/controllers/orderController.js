@@ -27,9 +27,19 @@ const createOrder = async (req, res, next) => {
       return res.status(400).json({ success: false, message: 'Please provide full shipping address' });
     }
 
-    // Verify products exist and validate stock
+    // Verify products exist, validate stock and positive integer quantities
     const validatedItems = [];
+    const productsToUpdate = [];
+
     for (const item of items) {
+      const qty = Number(item.quantity);
+      if (!Number.isInteger(qty) || qty < 1 || qty > 20) {
+        return res.status(400).json({
+          success: false,
+          message: `Invalid quantity for garment ${item.name || 'item'}. Must be between 1 and 20.`
+        });
+      }
+
       const product = await Product.findById(item.product || item.productId);
       if (!product) {
         return res.status(404).json({
@@ -38,36 +48,52 @@ const createOrder = async (req, res, next) => {
         });
       }
 
+      if (product.stock < qty) {
+        return res.status(400).json({
+          success: false,
+          message: `Insufficient stock for ${product.name}. Only ${product.stock} units available.`
+        });
+      }
+
       const itemPrice = product.discountPrice > 0 ? product.discountPrice : product.price;
 
       validatedItems.push({
         product: product._id,
         name: product.name,
-        image: product.images[0] || item.image,
+        image: (product.images && product.images[0]) || item.image || '/assets/products/hoodie_black.jpg',
         size: item.size || 'M',
         color: item.color || '',
-        quantity: item.quantity,
+        quantity: qty,
         price: itemPrice
       });
 
-      // Deduct stock
-      if (product.stock >= item.quantity) {
-        product.stock -= item.quantity;
-        await product.save();
-      }
+      productsToUpdate.push({ product, qty });
     }
 
+    // Safely deduct stock after full validation
+    for (const { product, qty } of productsToUpdate) {
+      product.stock -= qty;
+      await product.save();
+    }
+
+    // Server-enforced canonical pricing (Prevents client-side price tampering)
     const calculatedItemsPrice = validatedItems.reduce(
       (acc, item) => acc + item.price * item.quantity,
       0
     );
 
-    const calculatedTax = taxPrice !== undefined ? Number(taxPrice) : Math.round(calculatedItemsPrice * 0.05);
-    const calculatedShipping = shippingPrice !== undefined ? Number(shippingPrice) : (calculatedItemsPrice > 999 ? 0 : 99);
-    const calculatedDiscount = discountAmount !== undefined ? Number(discountAmount) : 0;
-    const finalTotal = totalAmount !== undefined
-      ? Number(totalAmount)
-      : calculatedItemsPrice + calculatedTax + calculatedShipping - calculatedDiscount;
+    const calculatedTax = Math.round(calculatedItemsPrice * 0.05);
+    const calculatedShipping = calculatedItemsPrice > 999 ? 0 : 99;
+    const calculatedDiscount = discountAmount !== undefined ? Math.max(0, Number(discountAmount)) : 0;
+    const finalTotal = calculatedItemsPrice + calculatedTax + calculatedShipping - calculatedDiscount;
+
+    // Reject forged or manipulated client-side totalAmount
+    if (totalAmount !== undefined && Math.abs(Number(totalAmount) - finalTotal) > 2) {
+      return res.status(400).json({
+        success: false,
+        message: 'Security validation failed: Order total mismatch detected.'
+      });
+    }
 
     const order = new Order({
       user: req.user._id,
@@ -80,9 +106,10 @@ const createOrder = async (req, res, next) => {
       discountAmount: calculatedDiscount,
       totalAmount: finalTotal,
       status: 'Placed',
-      paymentStatus: paymentMethod === 'COD' ? 'Pending' : 'Pending',
+      paymentStatus: 'Pending',
       notes: notes || ''
     });
+
 
     const createdOrder = await order.save();
 

@@ -50,9 +50,10 @@ const getProducts = async (req, res, next) => {
       }
     }
 
-    // Keyword Search
+    // Keyword Search (Protected against ReDoS and Malformed Regex Injection)
     if (search && search.trim() !== '') {
-      const regex = new RegExp(search.trim(), 'i');
+      const sanitizedSearch = search.trim().slice(0, 60).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(sanitizedSearch, 'i');
       query.$or = [
         { name: regex },
         { description: regex },
@@ -150,31 +151,27 @@ const getProductById = async (req, res, next) => {
 // @access  Private (Customer)
 const createProductReview = async (req, res, next) => {
   try {
-    const { rating, comment, title } = req.body;
-    const product = await Product.findById(req.params.id);
-
-    if (!product) {
-      return res.status(404).json({ success: false, message: 'Product not found' });
-    }
-
-    const alreadyReviewed = await Review.findOne({
-      product: req.params.id,
-      user: req.user._id
-    });
-
-    if (alreadyReviewed) {
+    const numericRating = Math.round(Number(rating));
+    if (!Number.isInteger(numericRating) || numericRating < 1 || numericRating > 5) {
       return res.status(400).json({
         success: false,
-        message: 'You have already reviewed this product'
+        message: 'Rating must be an integer between 1 and 5'
+      });
+    }
+
+    if (!comment || comment.trim().length === 0 || comment.trim().length > 1000) {
+      return res.status(400).json({
+        success: false,
+        message: 'Review comment is required and must not exceed 1000 characters'
       });
     }
 
     const review = await Review.create({
       user: req.user._id,
       product: req.params.id,
-      rating: Number(rating),
-      title: title || '',
-      comment
+      rating: numericRating,
+      title: (title || '').slice(0, 100),
+      comment: comment.trim()
     });
 
     // Update aggregate rating on product
