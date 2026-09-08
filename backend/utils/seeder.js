@@ -241,10 +241,10 @@ const seedData = async () => {
     console.log('👤 Creating initial Admin and Customer accounts...');
     const adminUser = await User.create({
       name: "Harsha's Creation Administrator",
-      email: 'admin@harshascreation.com',
-      password: 'Admin@123',
+      email: 'hv767646@gmail.com',
+      password: 'Harsha@admin',
       role: 'admin',
-      phone: '+91 9876543210',
+      phone: '+91 7676461832',
       addresses: [
         {
           fullName: "Harsha's Creation Atelier HQ",
@@ -253,7 +253,7 @@ const seedData = async () => {
           state: 'Karnataka',
           postalCode: '560038',
           country: 'India',
-          phone: '+91 9876543210',
+          phone: '+91 7676461832',
           isDefault: true
         }
       ]
