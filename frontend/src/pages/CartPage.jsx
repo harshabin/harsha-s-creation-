@@ -219,7 +219,7 @@ const CartPage = () => {
                     placeholder="e.g. FIRST10"
                     value={promoInput}
                     onChange={(e) => setPromoInput(e.target.value)}
-                    className="flex-1 px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-300 rounded-xl uppercase tracking-wider focus:bg-white focus:ring-1 focus:ring-stone-950"
+                    className="flex-1 px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-300 text-stone-950 rounded-xl uppercase tracking-wider focus:bg-white focus:ring-1 focus:ring-stone-950"
                   />
                   <button
                     type="submit"

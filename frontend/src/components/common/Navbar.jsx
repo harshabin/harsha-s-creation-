@@ -183,9 +183,9 @@ const Navbar = () => {
                       onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                       className="flex items-center gap-1.5 py-1.5 px-3 rounded-full bg-[#12151D] border border-[#232A38] hover:border-[#99EEFF]/50 text-white text-xs font-semibold tracking-wide transition-all"
                     >
-                      <span className="w-5 h-5 rounded-full overflow-hidden bg-white/10 text-white flex items-center justify-center text-[10px] uppercase flex-shrink-0">
-                        {user.avatar ? (
-                          <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+                      <span className="w-6 h-6 rounded-full overflow-hidden bg-white/10 text-white flex items-center justify-center text-[10px] uppercase flex-shrink-0 border border-[#99EEFF]/40">
+                        {(user.avatar || isAdmin) ? (
+                          <img src={user.avatar || '/assets/founder_harsha_avatar.jpg'} alt={user.name} className="w-full h-full object-cover" />
                         ) : (
                           user.name.charAt(0)
                         )}

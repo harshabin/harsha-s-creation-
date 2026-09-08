@@ -457,18 +457,18 @@ const HomePage = () => {
             </div>
 
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-sm aspect-[4/5] rounded-[36px] overflow-hidden border border-[#232A38] shadow-2xl">
+              <div className="relative w-full max-w-sm aspect-[4/5] rounded-[36px] overflow-hidden border border-[#232A38] hover:border-[#99EEFF]/40 shadow-2xl transition-all duration-500 group shadow-cyan-subtle">
                 <img
                   src="/assets/founder_harsha.jpg"
                   alt="Harsha - Founder of Harsha's Creation"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#08090C] via-transparent to-transparent flex items-end p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#08090C] via-[#08090C]/20 to-transparent flex items-end p-6">
                   <div>
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-[#99EEFF] block">
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-[#99EEFF] block mb-1">
                       Bengaluru Atelier
                     </span>
-                    <p className="text-sm font-bold text-white">Harsha's Creation • Established 2024</p>
+                    <p className="text-base font-bold text-white font-display">Harsha's Creation • Established 2024</p>
                   </div>
                 </div>
               </div>

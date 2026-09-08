@@ -3,6 +3,7 @@ import { X, Camera, Check, Image as ImageIcon } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const PRESET_AVATARS = [
+  '/assets/founder_harsha_avatar.jpg',
   '/assets/founder_harsha.jpg',
   '/assets/products/hoodie_black.jpg',
   '/assets/products/trench_coat.jpg',
@@ -81,7 +82,7 @@ const ProfilePhotoModal = ({ isOpen, onClose }) => {
                 alt="Profile Preview"
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  e.target.src = '/assets/founder_harsha.jpg';
+                  e.target.src = '/assets/founder_harsha_avatar.jpg';
                 }}
               />
             ) : (

@@ -244,6 +244,7 @@ const seedData = async () => {
       email: 'hv767646@gmail.com',
       password: 'Harsha@admin',
       role: 'admin',
+      avatar: '/assets/founder_harsha_avatar.jpg',
       phone: '+91 7676461832',
       addresses: [
         {

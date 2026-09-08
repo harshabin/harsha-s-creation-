@@ -229,21 +229,21 @@ const CheckoutPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <Link to="/cart" className="inline-flex items-center gap-1 text-xs font-bold text-stone-600 hover:text-stone-950 uppercase tracking-wider mb-6">
+      <Link to="/cart" className="inline-flex items-center gap-2 text-xs font-bold text-[#8B95A5] hover:text-[#99EEFF] uppercase tracking-wider mb-6 transition-colors">
         <ArrowLeft className="w-4 h-4" />
         <span>Return to Shopping Bag</span>
       </Link>
 
-      <div className="pb-6 border-b border-stone-200">
-        <h1 className="text-3xl font-extrabold text-stone-950 font-display">Secure Atelier Checkout</h1>
-        <p className="text-xs text-stone-500 mt-1 flex items-center gap-1.5">
-          <Lock className="w-3.5 h-3.5 text-emerald-600" />
-          <span>Encrypted 256-bit payment gateway transaction</span>
+      <div className="pb-6 border-b border-[#232A38]">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white font-display">Secure Atelier Checkout</h1>
+        <p className="text-xs text-[#8B95A5] mt-1.5 flex items-center gap-1.5">
+          <Lock className="w-3.5 h-3.5 text-[#99EEFF]" />
+          <span>Encrypted 256-bit payment gateway transaction • Harsha's Creation Concierge</span>
         </p>
       </div>
 
       {error && (
-        <div className="my-6 p-4 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl text-xs font-semibold">
+        <div className="my-6 p-4 bg-rose-950/40 border border-rose-800/80 text-rose-300 rounded-2xl text-xs font-semibold">
           {error}
         </div>
       )}
@@ -252,15 +252,17 @@ const CheckoutPage = () => {
         {/* Left Side: Shipping & Payment (7 Cols) */}
         <div className="lg:col-span-7 space-y-8">
           {/* Shipping Address Section */}
-          <div className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 space-y-5 shadow-sm">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-stone-100">
-              <Truck className="w-5 h-5 text-stone-900" />
-              <h3 className="text-lg font-bold text-stone-950 font-display">1. Delivery Address</h3>
+          <div className="bg-[#11141B] rounded-3xl border border-[#232A38] p-6 sm:p-8 space-y-6 shadow-xl">
+            <div className="flex items-center gap-3 pb-4 border-b border-[#1E2430]">
+              <div className="w-9 h-9 rounded-xl bg-[#99EEFF]/10 border border-[#99EEFF]/20 flex items-center justify-center text-[#99EEFF]">
+                <Truck className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-bold text-white font-display">1. Delivery Destination</h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-2">
                   Recipient Full Name *
                 </label>
                 <input
@@ -268,13 +270,13 @@ const CheckoutPage = () => {
                   required
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  placeholder="e.g. Rohan Sharma"
-                  className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white focus:ring-1 focus:ring-stone-950"
+                  placeholder="e.g. Harsha Vardhan"
+                  className="w-full px-4 py-3 text-sm bg-[#0B0D13] border border-[#232A38] text-white placeholder-[#8B95A5] rounded-xl focus:outline-none focus:border-[#99EEFF] focus:ring-1 focus:ring-[#99EEFF] transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-2">
                   Phone Number (for Courier SMS) *
                 </label>
                 <input
@@ -283,28 +285,28 @@ const CheckoutPage = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+91 98765 43210"
-                  className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white focus:ring-1 focus:ring-stone-950"
+                  className="w-full px-4 py-3 text-sm bg-[#0B0D13] border border-[#232A38] text-white placeholder-[#8B95A5] rounded-xl focus:outline-none focus:border-[#99EEFF] focus:ring-1 focus:ring-[#99EEFF] transition-all font-mono"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
-                Street Address / Flat / Building *
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-2">
+                Street Address / Flat / Landmark *
               </label>
               <input
                 type="text"
                 required
                 value={street}
                 onChange={(e) => setStreet(e.target.value)}
-                placeholder="e.g. 402 Highline Residency, 14th Road"
-                className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white focus:ring-1 focus:ring-stone-950"
+                placeholder="e.g. 108 Atelier Avenue, Indiranagar"
+                className="w-full px-4 py-3 text-sm bg-[#0B0D13] border border-[#232A38] text-white placeholder-[#8B95A5] rounded-xl focus:outline-none focus:border-[#99EEFF] focus:ring-1 focus:ring-[#99EEFF] transition-all"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-2">
                   City *
                 </label>
                 <input
@@ -312,13 +314,13 @@ const CheckoutPage = () => {
                   required
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  placeholder="e.g. Mumbai"
-                  className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white focus:ring-1 focus:ring-stone-950"
+                  placeholder="e.g. Bengaluru"
+                  className="w-full px-4 py-3 text-sm bg-[#0B0D13] border border-[#232A38] text-white placeholder-[#8B95A5] rounded-xl focus:outline-none focus:border-[#99EEFF] focus:ring-1 focus:ring-[#99EEFF] transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-2">
                   State *
                 </label>
                 <input
@@ -326,13 +328,13 @@ const CheckoutPage = () => {
                   required
                   value={state}
                   onChange={(e) => setState(e.target.value)}
-                  placeholder="Maharashtra"
-                  className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white focus:ring-1 focus:ring-stone-950"
+                  placeholder="Karnataka"
+                  className="w-full px-4 py-3 text-sm bg-[#0B0D13] border border-[#232A38] text-white placeholder-[#8B95A5] rounded-xl focus:outline-none focus:border-[#99EEFF] focus:ring-1 focus:ring-[#99EEFF] transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-2">
                   Postal Code / PIN *
                 </label>
                 <input
@@ -340,84 +342,86 @@ const CheckoutPage = () => {
                   required
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
-                  placeholder="400050"
-                  className="w-full px-3.5 py-2.5 text-sm bg-stone-50 border border-stone-300 rounded-xl focus:bg-white focus:ring-1 focus:ring-stone-950"
+                  placeholder="560038"
+                  className="w-full px-4 py-3 text-sm bg-[#0B0D13] border border-[#232A38] text-white placeholder-[#8B95A5] rounded-xl focus:outline-none focus:border-[#99EEFF] focus:ring-1 focus:ring-[#99EEFF] transition-all font-mono"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#8B95A5] mb-2">
                 Delivery Instructions (Optional)
               </label>
               <input
                 type="text"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="e.g. Leave with concierge / Gate code 1234"
-                className="w-full px-3.5 py-2 text-xs bg-stone-50 border border-stone-300 rounded-xl focus:bg-white"
+                placeholder="e.g. Leave with security / Contact upon arrival"
+                className="w-full px-4 py-2.5 text-sm bg-[#0B0D13] border border-[#232A38] text-white placeholder-[#8B95A5] rounded-xl focus:outline-none focus:border-[#99EEFF] focus:ring-1 focus:ring-[#99EEFF] transition-all"
               />
             </div>
           </div>
 
           {/* Payment Method Selection */}
-          <div className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 space-y-4 shadow-sm">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-stone-100">
-              <CreditCard className="w-5 h-5 text-stone-900" />
-              <h3 className="text-lg font-bold text-stone-950 font-display">2. Payment Method</h3>
+          <div className="bg-[#11141B] rounded-3xl border border-[#232A38] p-6 sm:p-8 space-y-6 shadow-xl">
+            <div className="flex items-center gap-3 pb-4 border-b border-[#1E2430]">
+              <div className="w-9 h-9 rounded-xl bg-[#99EEFF]/10 border border-[#99EEFF]/20 flex items-center justify-center text-[#99EEFF]">
+                <CreditCard className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-bold text-white font-display">2. Payment Method</h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Razorpay Option */}
               <label
-                className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between ${
+                className={`p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between ${
                   paymentMethod === 'Razorpay'
-                    ? 'border-stone-950 bg-stone-50 ring-1 ring-stone-950'
-                    : 'border-stone-200 hover:border-stone-400'
+                    ? 'border-[#99EEFF] bg-[#161B24] shadow-cyan-subtle ring-1 ring-[#99EEFF]'
+                    : 'border-[#232A38] bg-[#0B0D13] hover:border-[#99EEFF]/40'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="Razorpay"
                       checked={paymentMethod === 'Razorpay'}
                       onChange={(e) => setPaymentMethod(e.target.value)}
-                      className="text-stone-950 focus:ring-stone-950"
+                      className="accent-[#99EEFF] w-4 h-4 cursor-pointer"
                     />
-                    <span className="text-sm font-bold text-stone-900">Razorpay Online</span>
+                    <span className="text-sm font-bold text-white">Razorpay Online</span>
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider bg-brand-100 text-brand-900 px-2 py-0.5 rounded">
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-[#99EEFF]/15 text-[#99EEFF] border border-[#99EEFF]/30 px-2.5 py-0.5 rounded-full">
                     Recommended
                   </span>
                 </div>
-                <p className="text-xs text-stone-500 mt-2">
-                  UPI, Cards (Visa, Mastercard, RuPay), NetBanking, Cred & Wallets
+                <p className="text-xs text-[#8B95A5] mt-3 leading-relaxed">
+                  UPI (GPay, PhonePe, Paytm), Cards (Visa, Mastercard, RuPay), NetBanking & Wallets
                 </p>
               </label>
 
               {/* COD Option */}
               <label
-                className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between ${
+                className={`p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between ${
                   paymentMethod === 'COD'
-                    ? 'border-stone-950 bg-stone-50 ring-1 ring-stone-950'
-                    : 'border-stone-200 hover:border-stone-400'
+                    ? 'border-[#99EEFF] bg-[#161B24] shadow-cyan-subtle ring-1 ring-[#99EEFF]'
+                    : 'border-[#232A38] bg-[#0B0D13] hover:border-[#99EEFF]/40'
                 }`}
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
                   <input
                     type="radio"
                     name="paymentMethod"
                     value="COD"
                     checked={paymentMethod === 'COD'}
                     onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="text-stone-950 focus:ring-stone-950"
+                    className="accent-[#99EEFF] w-4 h-4 cursor-pointer"
                   />
-                  <span className="text-sm font-bold text-stone-900">Cash on Delivery</span>
+                  <span className="text-sm font-bold text-white">Cash on Delivery</span>
                 </div>
-                <p className="text-xs text-stone-500 mt-2">
-                  Pay with cash or UPI QR upon courier arrival at doorstep
+                <p className="text-xs text-[#8B95A5] mt-3 leading-relaxed">
+                  Pay via cash or UPI scan directly upon courier arrival at your doorstep
                 </p>
               </label>
             </div>
@@ -426,9 +430,9 @@ const CheckoutPage = () => {
 
         {/* Right Side: Order Items & Pay CTA (5 Cols) */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 space-y-6 shadow-sm">
-            <h3 className="text-lg font-bold text-stone-950 font-display pb-4 border-b border-stone-100">
-              Order Summary ({cartItems.length} items)
+          <div className="bg-[#11141B] rounded-3xl border border-[#232A38] p-6 sm:p-8 space-y-6 shadow-xl sticky top-24">
+            <h3 className="text-lg font-bold text-white font-display pb-4 border-b border-[#1E2430]">
+              Order Summary ({cartItems.length} {cartItems.length === 1 ? 'item' : 'items'})
             </h3>
 
             {/* Compact Item Thumbnails List */}
@@ -440,62 +444,62 @@ const CheckoutPage = () => {
                 const price = prod.discountPrice > 0 ? prod.discountPrice : (prod.price || item.price || 0);
 
                 return (
-                  <div key={item._id} className="flex items-center justify-between text-xs">
+                  <div key={item._id} className="flex items-center justify-between text-xs py-1.5 border-b border-[#1E2430]/60 last:border-0">
                     <div className="flex items-center gap-3">
-                      <img src={image} alt="" className="w-12 h-14 rounded-lg object-cover bg-stone-100" />
+                      <img src={image} alt="" className="w-12 h-14 rounded-lg object-cover bg-[#161B24] border border-[#232A38]" />
                       <div>
-                        <p className="font-semibold text-stone-900 line-clamp-1">{name}</p>
-                        <p className="text-stone-500">Size: {item.size} × {item.quantity}</p>
+                        <p className="font-semibold text-white line-clamp-1">{name}</p>
+                        <p className="text-[#8B95A5]">Size: <span className="text-stone-300 font-semibold">{item.size}</span> × {item.quantity}</p>
                       </div>
                     </div>
-                    <span className="font-bold text-stone-900">{formatCurrency(price * item.quantity)}</span>
+                    <span className="font-bold text-white font-mono">{formatCurrency(price * item.quantity)}</span>
                   </div>
                 );
               })}
             </div>
 
             {/* Calculations Breakdown */}
-            <div className="space-y-2.5 text-xs text-stone-600 pt-4 border-t border-stone-100">
+            <div className="space-y-3 text-xs text-[#8B95A5] pt-4 border-t border-[#1E2430]">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span className="font-semibold text-stone-900">{formatCurrency(subtotal)}</span>
+                <span className="font-semibold text-white font-mono">{formatCurrency(subtotal)}</span>
               </div>
 
               {discountAmount > 0 && (
-                <div className="flex justify-between text-emerald-700 font-semibold">
+                <div className="flex justify-between text-[#99EEFF] font-semibold">
                   <span>Discount Applied</span>
-                  <span>-{formatCurrency(discountAmount)}</span>
+                  <span className="font-mono">-{formatCurrency(discountAmount)}</span>
                 </div>
               )}
 
               <div className="flex justify-between">
-                <span>Express Courier Shipping</span>
-                <span className="font-semibold text-stone-900">
-                  {shippingPrice === 0 ? <span className="text-emerald-700 font-bold">FREE</span> : formatCurrency(shippingPrice)}
+                <span>Express Atelier Shipping</span>
+                <span className="font-semibold text-white font-mono">
+                  {shippingPrice === 0 ? <span className="text-[#99EEFF] font-bold">COMPLIMENTARY</span> : formatCurrency(shippingPrice)}
                 </span>
               </div>
 
               <div className="flex justify-between">
                 <span>Applicable GST (5%)</span>
-                <span className="font-semibold text-stone-900">{formatCurrency(taxPrice)}</span>
+                <span className="font-semibold text-white font-mono">{formatCurrency(taxPrice)}</span>
               </div>
 
-              <div className="flex justify-between pt-4 border-t border-stone-200 text-lg font-extrabold text-stone-950 font-display">
+              <div className="flex justify-between pt-4 border-t border-[#232A38] text-lg font-extrabold text-white font-display items-center">
                 <span>Grand Total</span>
-                <span>{formatCurrency(grandTotal)}</span>
+                <span className="text-[#99EEFF] font-mono text-xl">{formatCurrency(grandTotal)}</span>
               </div>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-stone-950 hover:bg-stone-800 text-white rounded-2xl text-xs font-bold uppercase tracking-widest transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-4 bg-[#99EEFF] hover:bg-[#80E8FF] text-[#08090C] rounded-2xl text-xs font-extrabold uppercase tracking-widest transition-all shadow-lg hover:shadow-cyan-subtle flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
             >
               {loading ? (
-                <span>Processing Order...</span>
+                <span>Securing Order...</span>
               ) : (
                 <>
-                  <Lock className="w-4 h-4" />
+                  <Lock className="w-4 h-4 text-[#08090C]" />
                   <span>Place Order • {formatCurrency(grandTotal)}</span>
                 </>
               )}
@@ -506,35 +510,35 @@ const CheckoutPage = () => {
 
       {/* Interactive Razorpay Gateway Simulator Modal */}
       {simulatorModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-sm animate-fade-in">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-stone-200 space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-stone-100">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+          <div className="bg-[#11141B] rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#232A38] space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-[#1E2430]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-[#99EEFF] text-[#08090C] flex items-center justify-center font-bold text-xs font-mono">
                   RZP
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-stone-900">Razorpay Payment Simulator</h4>
-                  <p className="text-[10px] text-stone-400">Sandbox Test Mode</p>
+                  <h4 className="text-sm font-bold text-white">Razorpay Payment Simulator</h4>
+                  <p className="text-[10px] text-[#8B95A5]">Sandbox Test Mode</p>
                 </div>
               </div>
-              <span className="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
-                Active Test Mode
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
+                Active Sandbox
               </span>
             </div>
 
-            <div className="p-4 bg-stone-50 rounded-2xl space-y-2 text-xs">
+            <div className="p-4 bg-[#0B0D13] border border-[#232A38] rounded-2xl space-y-2 text-xs">
               <div className="flex justify-between">
-                <span className="text-stone-500">Merchant</span>
-                <span className="font-bold text-stone-900">HARSHA'S CREATION ATELIER</span>
+                <span className="text-[#8B95A5]">Merchant</span>
+                <span className="font-bold text-white">HARSHA'S CREATION ATELIER</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-stone-500">Amount Due</span>
-                <span className="font-extrabold text-stone-950 text-base">{formatCurrency(grandTotal)}</span>
+                <span className="text-[#8B95A5]">Amount Due</span>
+                <span className="font-extrabold text-[#99EEFF] text-base font-mono">{formatCurrency(grandTotal)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-stone-500">Transaction Ref</span>
-                <span className="font-mono text-[11px] text-stone-600">{simulatorModal.razorpayOrderId}</span>
+                <span className="text-[#8B95A5]">Transaction Ref</span>
+                <span className="font-mono text-[11px] text-stone-400">{simulatorModal.razorpayOrderId}</span>
               </div>
             </div>
 
@@ -543,16 +547,16 @@ const CheckoutPage = () => {
                 type="button"
                 onClick={handleSimulatorPay}
                 disabled={loading}
-                className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-400 text-[#08090C] rounded-xl text-xs font-extrabold uppercase tracking-wider shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
-                <CheckCircle2 className="w-4 h-4" />
+                <CheckCircle2 className="w-4 h-4 text-[#08090C]" />
                 <span>Simulate Successful Payment</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setSimulatorModal(null)}
-                className="w-full py-2.5 text-xs font-semibold text-stone-500 hover:text-stone-900 transition-colors"
+                className="w-full py-2.5 text-xs font-semibold text-[#8B95A5] hover:text-white transition-colors cursor-pointer"
               >
                 Cancel Transaction
               </button>
