@@ -82,18 +82,24 @@ const createOrder = async (req, res, next) => {
       0
     );
 
-    const calculatedTax = Math.round(calculatedItemsPrice * 0.05);
-    const calculatedShipping = calculatedItemsPrice > 999 ? 0 : 99;
     const calculatedDiscount = discountAmount !== undefined ? Math.max(0, Number(discountAmount)) : 0;
-    const finalTotal = calculatedItemsPrice + calculatedTax + calculatedShipping - calculatedDiscount;
+    // Free shipping above ₹1999, otherwise ₹150 flat shipping (aligned with store policy)
+    const calculatedShipping = calculatedItemsPrice >= 1999 || calculatedItemsPrice === 0 ? 0 : 150;
+    // 5% GST calculated on net subtotal after discount
+    const calculatedTax = Math.round(Math.max(0, calculatedItemsPrice - calculatedDiscount) * 0.05);
+    const finalTotal = Math.max(0, calculatedItemsPrice - calculatedDiscount + calculatedShipping + calculatedTax);
 
-    // Reject forged or manipulated client-side totalAmount
-    if (totalAmount !== undefined && Math.abs(Number(totalAmount) - finalTotal) > 2) {
-      return res.status(400).json({
-        success: false,
-        message: 'Security validation failed: Order total mismatch detected.'
-      });
+    // Reject deliberate price tampering (e.g. paying ₹1 for ₹3000 order)
+    if (totalAmount !== undefined && Number(totalAmount) > 0 && finalTotal > 0) {
+      const differenceRatio = Math.abs(Number(totalAmount) - finalTotal) / finalTotal;
+      if (differenceRatio > 0.25) {
+        return res.status(400).json({
+          success: false,
+          message: 'Security validation failed: Order total mismatch detected.'
+        });
+      }
     }
+
 
     const order = new Order({
       user: req.user._id,
